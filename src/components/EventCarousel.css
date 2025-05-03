@@ -2,7 +2,13 @@
   width: 80%;
   margin: 0 auto;
   padding: 2rem 0;
+  
 }
+.carousel-slide {
+  padding: 0 10px; /* Adds space between slides */
+  box-sizing: border-box;
+}
+
 
 .carousel-image {
   width: 100%;
