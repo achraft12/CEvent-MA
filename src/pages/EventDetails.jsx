@@ -9,6 +9,7 @@ const EventDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isLoggedIn, user } = useAuth();
+
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -60,23 +61,20 @@ const EventDetails = () => {
 
       <div className="event-meta">
         <h1>{event.name}</h1>
-        <p><strong>Date:</strong> {event.startDate?.seconds ? new Date(event.startDate.seconds * 1000).toLocaleDateString() : ""}</p>
+        <p><strong>Date:</strong> {event.startDate?.seconds ? new Date(event.startDate.seconds * 1000).toLocaleDateString() : "N/A"}</p>
         <p><strong>Category:</strong> {event.category}</p>
         <p><strong>Location:</strong> {event.location}</p>
         <p><strong>Organizer:</strong> {event.organizer || "N/A"}</p>
-        <p>
-          <strong>Time:</strong> {event.startTime || "N/A"} - {event.endTime || "N/A"}
-        </p>
+        <p><strong>Time:</strong> {event.startTime || "N/A"} - {event.endTime || "N/A"}</p>
       </div>
 
       <div className="event-description">
-        <h2>About the Event</h2>
         <p>{event.description}</p>
       </div>
 
       <div className="event-actions">
-        <button className="event-action-button" onClick={() => handleProtectedAction("Attend")}>Attend</button>
-        <button className="event-action-button donate" onClick={() => handleProtectedAction("Donate")}>Donate</button>
+        <button onClick={() => handleProtectedAction("Join")}>Join Event</button>
+        <button onClick={() => handleProtectedAction("Bookmark")}>Bookmark</button>
       </div>
     </div>
   );
