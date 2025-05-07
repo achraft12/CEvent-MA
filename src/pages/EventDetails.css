@@ -5,7 +5,6 @@
   background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease-in-out;
   font-family: "Segoe UI", sans-serif;
 }
 
@@ -20,12 +19,6 @@
 
 .event-details-image:hover {
   transform: scale(1.01);
-}
-.donation-section {
-  margin-top: 2rem;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
 }
 
 .back-button {
@@ -60,12 +53,6 @@
   text-align: left;
 }
 
-.event-description h2 {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 0.8rem;
-}
-
 .event-description p {
   font-size: 1.1rem;
   line-height: 1.6;
@@ -75,6 +62,7 @@
 .event-actions {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 1.2rem;
   margin-top: 2.5rem;
 }
@@ -84,14 +72,23 @@
   background-color: #1976d2;
   color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(25, 118, 210, 0.2);
+  transition: all 0.3s ease;
 }
 
 .event-action-button:hover {
   background-color: #125aa3;
+  transform: translateY(-2px);
+}
+
+.event-action-button:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .event-action-button.donate {
@@ -100,4 +97,76 @@
 
 .event-action-button.donate:hover {
   background-color: #b71c1c;
+}
+
+.donation-section {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .event-details-container {
+    padding: 1.5rem;
+    margin: 1.5rem;
+  }
+
+  .event-details-image {
+    max-height: 300px;
+  }
+
+  .event-meta h1 {
+    font-size: 1.75rem;
+  }
+
+  .event-meta p {
+    font-size: 1rem;
+  }
+
+  .event-description p {
+    font-size: 1rem;
+  }
+
+  .event-actions {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .event-action-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .event-details-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .event-details-image {
+    max-height: 250px;
+  }
+
+  .event-meta h1 {
+    font-size: 1.5rem;
+  }
+
+  .event-meta p {
+    font-size: 0.95rem;
+  }
+
+  .event-description p {
+    font-size: 0.95rem;
+  }
+
+  .event-actions {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .event-action-button {
+    width: 100%;
+  }
 }

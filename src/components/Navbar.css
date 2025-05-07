@@ -76,6 +76,9 @@
   width: 100%;
 }
 
+/* Media Queries for Responsiveness */
+
+/* Medium screens (tablets, small laptops) */
 @media (max-width: 768px) {
   .nav-list {
     width: 90%;
@@ -83,18 +86,28 @@
   }
 }
 
+/* Small screens (phones and smaller devices) */
 @media (max-width: 600px) {
   .nav-list {
-    flex-direction: column;
+    flex-direction: column; /* Stacks items vertically */
     gap: 1rem;
     padding: 1rem;
+    background-color: transparent; /* Remove background around nav list */
+    border-radius: 0; /* Remove border radius */
   }
 
   .nav-item {
     width: 100%;
     justify-content: center;
+    background-color: transparent; /* Remove background around individual items */
+  }
+
+  .nav-item a {
+    color: var(--text-color); /* Reset text color to default */
   }
 }
+
+/* Logout Button Styles */
 .logout-button {
   background-color: #f44336;
   color: white;
@@ -110,11 +123,13 @@
   background-color: #d32f2f;
 }
 
+/* User Email */
 .user-email {
   font-weight: bold;
   margin-right: 10px;
   color: #1976d2;
 }
+
 .user-email a {
   color: #1976d2;
   text-decoration: none;
@@ -123,4 +138,12 @@
 
 .user-email a:hover {
   text-decoration: underline;
+}
+
+/* Mobile user email adjustments */
+@media (max-width: 600px) {
+  .user-email {
+    font-size: 0.875rem; /* Slightly smaller text on mobile */
+    margin-right: 0;
+  }
 }
