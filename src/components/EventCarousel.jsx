@@ -1,43 +1,34 @@
 // src/components/EventCarousel.js
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import "./EventCarousel.css"; // Optional custom styles
-import "slick-carousel/slick/slick.css"; 
+import { db } from "../firebase";
+import { collection, getDocs, query, limit } from "firebase/firestore";
+import "./EventCarousel.css";
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-
-const events = [
-  {
-    id: 1,
-    title: "Food Drive for the Homeless",
-    date: "2025-05-10",
-    image: "https://www.rentecdirect.com/blog/wp-content/uploads/2016/12/bigstock-Happy-volunteer-family-holding-85091345.jpg",
-    description: "Join us to distribute food to those in need.",
-  },
-  {
-    id: 2,
-    title: "Blood Donation Camp",
-    date: "2025-05-18",
-    image: "https://www.rentecdirect.com/blog/wp-content/uploads/2016/12/bigstock-Happy-volunteer-family-holding-85091345.jpg",
-    description: "Donate blood and save lives.",
-  },
-  {
-    id: 3,
-    title: "School Supplies for Kids",
-    date: "2025-06-01",
-    image: "https://www.rentecdirect.com/blog/wp-content/uploads/2016/12/bigstock-Happy-volunteer-family-holding-85091345.jpg",
-    description: "Help us provide school kits to children.",
-  },
-  {
-    id: 4,
-    title: "School Supplies for Kids",
-    date: "2025-06-01",
-    image: "https://www.rentecdirect.com/blog/wp-content/uploads/2016/12/bigstock-Happy-volunteer-family-holding-85091345.jpg",
-    description: "Help us provide school kits to children.",
-  },
-];
-
 const EventCarousel = () => {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const q = query(collection(db, "charityEvents"), limit(6));
+        const snapshot = await getDocs(q);
+        setEvents(snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        })));
+      } catch (error) {
+        console.error("Error fetching events for carousel:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchEvents();
+  }, []);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -48,16 +39,33 @@ const EventCarousel = () => {
     autoplaySpeed: 2000,
   };
 
+  if (loading) return <div>Loading events...</div>;
+  if (events.length === 0) return <div>No upcoming events.</div>;
+
   return (
     <div className="carousel-container">
       <Slider {...settings}>
         {events.map((event) => (
           <div key={event.id} className="carousel-slide">
-            <img src={event.image} alt={event.title} className="carousel-image" />
+            <img
+              src={event.coverImageUrl || "https://via.placeholder.com/150"}
+              alt={event.name}
+              className="carousel-image"
+            />
             <div className="carousel-caption">
-              <h3>{event.title}</h3>
-              <p>{event.date}</p>
-              <p>{event.description}</p>
+              <h3>{event.name}</h3>
+              <p>
+                {event.startDate?.seconds
+                  ? new Date(event.startDate.seconds * 1000).toLocaleDateString()
+                  : ""}
+              </p>
+              <p>
+                {event.description
+                  ? event.description.length > 80
+                    ? event.description.slice(0, 80) + "..."
+                    : event.description
+                  : "No description available."}
+              </p>
             </div>
           </div>
         ))}

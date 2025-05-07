@@ -1,48 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
 import "./EventDetails.css";
-
-// Dummy events (you can later fetch from backend or Firestore)
-const dummyEvents = [
-  {
-    id: "1",
-    title: "Feed the Homeless",
-    date: "2025-05-01",
-    category: "Food",
-    description: "Join us in preparing and distributing nutritious meals to individuals experiencing homelessness. Together, we can make a difference one plate at a time.",
-    location: "Central Park, New York City",
-    organizer: "Helping Hands Organization",
-    image: "https://www.rentecdirect.com/blog/wp-content/uploads/2016/12/bigstock-Happy-volunteer-family-holding-85091345.jpg ",
-  },
-  {
-    id: "2",
-    title: "Blood Donation Camp",
-    date: "2025-05-10",
-    category: "Health",
-    description: "A single blood donation can save up to three lives. Join our mobile donation camp and be a hero to someone in need.",
-    location: "Red Cross Center, Boston",
-    organizer: "Global Blood Bank",
-    image: "https://source.unsplash.com/featured/?blood,donation",
-  },
-  {
-    id: "3",
-    title: "Tree Planting",
-    date: "2025-05-15",
-    category: "Environment",
-    description: "Participate in our reforestation drive to help combat climate change. All supplies will be provided. Family-friendly!",
-    location: "City Forest Park, San Francisco",
-    organizer: "Green Earth Collective",
-    image: "https://source.unsplash.com/featured/?tree,planting",
-  },
-];
 
 const EventDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isLoggedIn, user } = useAuth();
 
-  const event = dummyEvents.find((event) => event.id === id);
+  const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEvent = async () => {
+      try {
+        const eventRef = doc(db, "charityEvents", id);
+        const eventSnap = await getDoc(eventRef);
+        if (eventSnap.exists()) {
+          setEvent({ id: eventSnap.id, ...eventSnap.data() });
+        } else {
+          setEvent(null);
+        }
+      } catch (error) {
+        console.error("Error fetching event:", error);
+        setEvent(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchEvent();
+  }, [id]);
 
   const handleProtectedAction = (action) => {
     if (!isLoggedIn) {
@@ -52,6 +41,10 @@ const EventDetails = () => {
     }
     alert(`${user.email} chose to "${action}" this event.`);
   };
+
+  if (loading) {
+    return <p style={{ textAlign: "center", marginTop: "2rem" }}>Loading...</p>;
+  }
 
   if (!event) {
     return (
@@ -64,24 +57,24 @@ const EventDetails = () => {
   return (
     <div className="event-details-container">
       <button className="back-button" onClick={() => navigate(-1)}>← Back</button>
-      <img src={event.image} alt={event.title} className="event-details-image" />
+      <img src={event.coverImageUrl || "https://via.placeholder.com/150"} alt={event.name} className="event-details-image" />
 
       <div className="event-meta">
-        <h1>{event.title}</h1>
-        <p><strong>Date:</strong> {event.date}</p>
+        <h1>{event.name}</h1>
+        <p><strong>Date:</strong> {event.startDate?.seconds ? new Date(event.startDate.seconds * 1000).toLocaleDateString() : "N/A"}</p>
         <p><strong>Category:</strong> {event.category}</p>
         <p><strong>Location:</strong> {event.location}</p>
-        <p><strong>Organizer:</strong> {event.organizer}</p>
+        <p><strong>Organizer:</strong> {event.organizer || "N/A"}</p>
+        <p><strong>Time:</strong> {event.startTime || "N/A"} - {event.endTime || "N/A"}</p>
       </div>
 
       <div className="event-description">
-        <h2>About the Event</h2>
         <p>{event.description}</p>
       </div>
 
       <div className="event-actions">
-        <button className="event-action-button" onClick={() => handleProtectedAction("Attend")}>Attend</button>
-        <button className="event-action-button donate" onClick={() => handleProtectedAction("Donate")}>Donate</button>
+        <button onClick={() => handleProtectedAction("Join")}>Join Event</button>
+        <button onClick={() => handleProtectedAction("Bookmark")}>Bookmark</button>
       </div>
     </div>
   );
