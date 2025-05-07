@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
+
 import "./EventDetails.css";
 
 const EventDetails = () => {
@@ -75,6 +76,17 @@ const EventDetails = () => {
       <div className="event-actions">
         <button onClick={() => handleProtectedAction("Join")}>Join Event</button>
         <button onClick={() => handleProtectedAction("Bookmark")}>Bookmark</button>
+
+        {isLoggedIn ? (
+          <div className="donation-section">
+            <h2>Make a Donation</h2>
+            <button onClick={() => navigate(`/donation/${event.id}`)}>Donate Now</button>
+          </div>
+        ) : (
+          <p style={{ marginTop: "1rem" }}>
+            Please <a onClick={() => navigate("/login")} style={{ cursor: "pointer", color: "blue" }}>log in</a> to donate.
+          </p>
+        )}
       </div>
     </div>
   );

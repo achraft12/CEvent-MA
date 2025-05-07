@@ -21,6 +21,12 @@
 .event-details-image:hover {
   transform: scale(1.01);
 }
+.donation-section {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
 
 .back-button {
   background-color: #f5f5f5;

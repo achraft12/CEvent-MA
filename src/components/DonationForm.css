@@ -1,25 +1,64 @@
 /* DonationForm.css */
 .donation-form {
-    max-width: 400px;
-    margin: auto;
+  max-width: 400px;
+  margin: auto;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9; /* Light background for better visibility */
+}
+
+.donation-form input {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.7rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.donation-form input:focus {
+  outline: none;
+  border-color: #635bff; /* Blue border on focus */
+}
+
+.donation-form button {
+  width: 100%;
+  padding: 0.7rem;
+  background-color: #635bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.donation-form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.donation-form button:hover:not(:disabled) {
+  background-color: #4a47d8; /* Darker blue on hover */
+}
+
+.card-element-container {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .donation-form {
+    max-width: 100%;
     padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
   }
-  
-  .donation-form input {
-    width: 100%;
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-  }
-  
+
   .donation-form button {
-    width: 100%;
-    padding: 0.7rem;
-    background-color: #635bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    padding: 1rem;
   }
-  
+}
