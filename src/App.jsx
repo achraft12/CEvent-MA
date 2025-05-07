@@ -1,4 +1,5 @@
 // src/App.jsx
+import Donation from './pages/Donation.jsx';  // <-- Import your donation page
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
@@ -28,8 +29,8 @@ function App() {
           <Route path="//event_list" element={<EventList />} />
           <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/donate" element={<Donation />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
-
         </Routes>
        <Footer />
       </div>
