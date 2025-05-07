@@ -12,6 +12,7 @@ import EventList from './pages/Event_List.jsx';
 import EventDetails from './pages/EventDetails.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Profile from './pages/Profile.jsx';
+import AddEvent from './pages/AddEvent.jsx';
 
 import './App.css';
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/event_list" element={<EventList />} />
           <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/addevent" element={<AddEvent />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
 
         </Routes>

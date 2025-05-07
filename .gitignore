@@ -23,5 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 # .gitignore
-.en
+.env
 project1-5f108-firebase-adminsdk-fbsvc-05c3d608d4.json
