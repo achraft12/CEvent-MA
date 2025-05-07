@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { db } from "../firebase";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 import "./AddEvent.css";
 
 const AddEvent = () => {
@@ -10,6 +12,7 @@ const AddEvent = () => {
     startDate: "",
     endDate: "",
     description: "",
+    coverImageUrl: "", // Add this line
   });
 
   const [image, setImage] = useState(null);
@@ -26,14 +29,35 @@ const AddEvent = () => {
     setImagePreview(URL.createObjectURL(file));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Event submitted:", eventData);
-    if (image) {
-      console.log("Image selected:", image.name);
+
+    // Convert date strings to Firestore Timestamps
+    const startDate = Timestamp.fromDate(new Date(eventData.startDate));
+    const endDate = Timestamp.fromDate(new Date(eventData.endDate));
+
+    try {
+      await addDoc(collection(db, "charityEvents"), {
+        ...eventData,
+        startDate,
+        endDate,
+      });
+      alert("Event Created and saved to database!");
+      setEventData({
+        title: "",
+        name: "",
+        startTime: "",
+        endTime: "",
+        startDate: "",
+        endDate: "",
+        description: "",
+        coverImageUrl: "", // Add this line
+      });
+      setImage(null);
+      setImagePreview(null);
+    } catch (error) {
+      alert("Error adding event: " + error.message);
     }
-    // You can upload the data to Firebase here
-    alert("Event Created!");
   };
 
   return (
@@ -113,6 +137,29 @@ const AddEvent = () => {
         {imagePreview && (
           <img
             src={imagePreview}
+            alt="Preview"
+            style={{
+              width: "100%",
+              maxHeight: "200px",
+              objectFit: "cover",
+              marginBottom: "20px",
+              borderRadius: "8px",
+            }}
+          />
+        )}
+
+        <label>Event Image URL</label>
+        <input
+          type="url"
+          name="coverImageUrl"
+          placeholder="Paste image URL here"
+          value={eventData.coverImageUrl}
+          onChange={handleChange}
+          required
+        />
+        {eventData.coverImageUrl && (
+          <img
+            src={eventData.coverImageUrl}
             alt="Preview"
             style={{
               width: "100%",
