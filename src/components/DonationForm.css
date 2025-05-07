@@ -1,0 +1,25 @@
+/* DonationForm.css */
+.donation-form {
+    max-width: 400px;
+    margin: auto;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .donation-form input {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+  }
+  
+  .donation-form button {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: #635bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
