@@ -1,8 +1,22 @@
+/* Ensure the footer is always at the bottom */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+main {
+  flex: 1; /* This allows the main content to grow and take the available space */
+}
+
+/* Footer Styling */
 .footer {
   width: 100%;
   background-color: #252525;
   color: #fff;
   padding: 1rem 2rem;
+  margin-top: auto; /* Pushes the footer to the bottom */
 }
 
 .footer-content {
@@ -58,4 +72,79 @@
   font-size: 14px;
   color: #ccc;
   margin-top: 0.5rem;
+}
+
+/* Media Queries for responsiveness */
+
+/* Medium screens (tablets, small laptops) */
+@media (max-width: 1024px) {
+  .upper {
+    flex-direction: column; /* Stack elements vertically on medium screens */
+    align-items: center;
+  }
+
+  .socialmedia ul {
+    gap: 1rem;
+  }
+
+  .logo-image {
+    height: 80px;
+    width: 100px;
+  }
+
+  .footer-content .copyright {
+    font-size: 12px;
+  }
+}
+
+/* Small screens (phones and smaller devices) */
+@media (max-width: 768px) {
+  .upper {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .socialmedia ul {
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .logo-image {
+    height: 60px;
+    width: 80px;
+  }
+
+  .footer-content .copyright {
+    font-size: 12px;
+    margin-top: 1rem;
+  }
+}
+
+/* Extra small screens (phones in portrait orientation) */
+@media (max-width: 480px) {
+  .footer {
+    padding: 1rem;
+  }
+
+  .upper {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .socialmedia ul {
+    gap: 0.8rem;
+  }
+
+  .logo-image {
+    height: 50px;
+    width: 60px;
+  }
+
+  .footer-content .copyright {
+    font-size: 10px;
+    margin-top: 1rem;
+  }
 }

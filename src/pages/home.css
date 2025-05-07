@@ -1,133 +1,142 @@
 .home-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    height: auto;
-    padding: 0 20px;
-  }
-  
-  /* Hero Section */
+  max-width: 1200px;
+  margin: 0 auto;
+  height: auto;
+  padding: 0 20px;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  margin-bottom: 4rem;
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+/* Events Section */
+.events-section {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.events-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+/* Call to Action Section */
+.cta-section {
+  background-color: #f8f9fa;
+  padding: 4rem 0;
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.cta-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.cta-content p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+/* CTA Button */
+.cta-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-      url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-    background-size: cover;
-    background-position: center;
-    height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    margin-bottom: 4rem;
+    height: 400px;
   }
-  
-  .hero-content {
-    max-width: 800px;
-    padding: 0 20px;
-  }
-  
+
   .hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    font-weight: 700;
+    font-size: 2.5rem;
   }
-  
+
   .hero-content p {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-  }
-  
-  /* Events Section */
-  .events-section {
-    padding: 4rem 0;
-    text-align: center;
-  }
-  
-  .events-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    color: #333;
-  }
-  
-  /* Call to Action Section */
-  .cta-section {
-    background-color: #f8f9fa;
-    padding: 4rem 0;
-    text-align: center;
-    margin-top: 4rem;
-  }
-  
-  .cta-content {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  .cta-content h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #333;
-  }
-  
-  .cta-content p {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-    color: #666;
-  }
-  
-  /* CTA Button */
-  .cta-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 12px 30px;
     font-size: 1.1rem;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
   }
-  
-  .cta-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .events-section h2,
+  .cta-content h2 {
+    font-size: 2rem;
   }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .hero-section {
-      height: 400px;
-    }
-  
-    .hero-content h1 {
-      font-size: 2.5rem;
-    }
-  
-    .hero-content p {
-      font-size: 1.1rem;
-    }
-  
-    .events-section h2,
-    .cta-content h2 {
-      font-size: 2rem;
-    }
+
+  .cta-button {
+    padding: 10px 24px;
+    font-size: 1rem;
   }
-  
-  @media (max-width: 480px) {
-    .hero-section {
-      height: 300px;
-    }
-  
-    .hero-content h1 {
-      font-size: 2rem;
-    }
-  
-    .hero-content p {
-      font-size: 1rem;
-    }
-  
-    .events-section h2,
-    .cta-content h2 {
-      font-size: 1.75rem;
-    }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    height: 300px;
   }
-  
-  
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .events-section h2,
+  .cta-content h2 {
+    font-size: 1.75rem;
+  }
+
+  .cta-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+}

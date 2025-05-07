@@ -58,7 +58,11 @@ const EventDetails = () => {
   return (
     <div className="event-details-container">
       <button className="back-button" onClick={() => navigate(-1)}>← Back</button>
-      <img src={event.coverImageUrl || "https://via.placeholder.com/150"} alt={event.name} className="event-details-image" />
+      <img
+        src={event.coverImageUrl || "https://via.placeholder.com/150"}
+        alt={event.name}
+        className="event-details-image"
+      />
 
       <div className="event-meta">
         <h1>{event.name}</h1>
@@ -74,20 +78,29 @@ const EventDetails = () => {
       </div>
 
       <div className="event-actions">
-        <button onClick={() => handleProtectedAction("Join")}>Join Event</button>
-        <button onClick={() => handleProtectedAction("Bookmark")}>Bookmark</button>
-
-        {isLoggedIn ? (
-          <div className="donation-section">
-            <h2>Make a Donation</h2>
-            <button onClick={() => navigate(`/donation/${event.id}`)}>Donate Now</button>
-          </div>
-        ) : (
-          <p style={{ marginTop: "1rem" }}>
-            Please <a onClick={() => navigate("/login")} style={{ cursor: "pointer", color: "blue" }}>log in</a> to donate.
-          </p>
-        )}
+        <button className="event-action-button" onClick={() => handleProtectedAction("Join")}>
+          Join Event
+        </button>
+        <button className="event-action-button" onClick={() => handleProtectedAction("Bookmark")}>
+          Bookmark
+        </button>
       </div>
+
+      {isLoggedIn ? (
+        <div className="donation-section">
+          <h2>Make a Donation</h2>
+          <button
+            className="event-action-button donate"
+            onClick={() => navigate(`/donation/${event.id}`)}
+          >
+            Donate Now
+          </button>
+        </div>
+      ) : (
+        <p style={{ marginTop: "1rem" }}>
+          Please <span onClick={() => navigate("/login")} style={{ cursor: "pointer", color: "blue" }}>log in</span> to donate.
+        </p>
+      )}
     </div>
   );
 };

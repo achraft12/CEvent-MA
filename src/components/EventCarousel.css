@@ -47,3 +47,25 @@
   object-fit: cover;
   border-radius: 8px;
 }
+@media (max-width: 600px) {
+  .carousel-container {
+    width: 100%;
+    padding: 1rem 0;
+    background: none; /* removes background if there's one via inheritance */
+  }
+
+  .carousel-image {
+    height: 200px; /* reduce image height for small screens */
+  }
+
+  .carousel-card {
+    margin: 0 0.5rem;
+    box-shadow: none; /* optional: remove shadow for cleaner mobile view */
+    background: transparent; /* removes card background */
+  }
+
+  .carousel-caption h3 {
+    font-size: 18px;
+  }
+}
+

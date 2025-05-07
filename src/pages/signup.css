@@ -1,5 +1,4 @@
 .signup-container {
-
   display: flex;
   min-height: 100vh;
   max-height: 100vh;
@@ -7,8 +6,6 @@
   background-color: #fdf7f7;
   margin-top: 0; /* remove this to make it truly full screen */
 }
-
-
 
 .left-section {
   flex: 1;
@@ -26,13 +23,12 @@
   border-radius: 0;
 }
 
-
 .right-section {
   flex: 1;
   height: 100vh;
   max-height: 100vh;
   background: #ffecec;
-  padding:  0 4rem 0 4rem;
+  padding: 0 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -129,6 +125,7 @@ input {
   margin: 5px 0 10px;
 }
 
+/* Media query for screens 768px and below */
 @media (max-width: 768px) {
   .signup-container {
     flex-direction: column;
@@ -140,5 +137,62 @@ input {
   .right-section {
     width: 100%;
     max-width: 100%;
+    height: auto;
+  }
+
+  /* Adjusting the form padding and inputs */
+  .right-section {
+    padding: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  input {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .signup-button {
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .google-btn {
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .google-btn-text {
+    font-size: 16px;
+  }
+}
+
+/* Further adjustments for very small screens (phones, under 480px) */
+@media (max-width: 480px) {
+  .signup-container {
+    padding: 1rem;
+  }
+
+  .left-section {
+    height: auto;
+    display: none; /* Optionally hide the left image section on very small screens */
+  }
+
+  .right-section {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .signup-image {
+    display: none; /* Hide the image on small screens to save space */
+  }
+
+  input,
+  .signup-button,
+  .google-btn {
+    font-size: 14px;
+    padding: 8px;
   }
 }
