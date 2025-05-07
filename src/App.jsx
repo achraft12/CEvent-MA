@@ -31,7 +31,7 @@ function App() {
          
           <Route path="/donation/:id" element={<DonationPage />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/addevent" element={<AddEvent />} />
+          <Route path="/add_event" element={<AddEvent />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
        
