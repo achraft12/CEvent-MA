@@ -2,7 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../firebase";
-import { doc, getDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  collection,
+  addDoc,
+  Timestamp,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 
 import "./EventDetails.css";
 
@@ -34,13 +43,43 @@ const EventDetails = () => {
     fetchEvent();
   }, [id]);
 
-  const handleProtectedAction = (action) => {
+  const handleProtectedAction = async (action) => {
     if (!isLoggedIn) {
       alert("Please log in to continue.");
       navigate("/login");
       return;
     }
-    alert(`${user.email} chose to "${action}" this event.`);
+
+    if (action === "Join") {
+      try {
+        const attendanceRef = collection(db, "attendance");
+        const q = query(
+          attendanceRef,
+          where("userId", "==", user.uid),
+          where("eventId", "==", event.id)
+        );
+        const existing = await getDocs(q);
+
+        if (!existing.empty) {
+          alert("You already joined this event.");
+          return;
+        }
+
+        await addDoc(attendanceRef, {
+          attendanceDate: Timestamp.now(),
+          eventId: event.id,
+          userId: user.uid,
+          attendanceId: `${event.id}_${user.uid}`,
+        });
+
+        alert("You have successfully joined the event!");
+      } catch (error) {
+        console.error("Error creating attendance record:", error);
+        alert("Something went wrong. Please try again.");
+      }
+    } else {
+      alert(`${user.email} chose to "${action}" this event.`);
+    }
   };
 
   if (loading) {
@@ -57,7 +96,9 @@ const EventDetails = () => {
 
   return (
     <div className="event-details-container">
-      <button className="back-button" onClick={() => navigate(-1)}>← Back</button>
+      <button className="back-button" onClick={() => navigate(-1)}>
+        ← Back
+      </button>
       <img
         src={event.coverImageUrl || "https://via.placeholder.com/150"}
         alt={event.name}
@@ -66,11 +107,25 @@ const EventDetails = () => {
 
       <div className="event-meta">
         <h1>{event.name}</h1>
-        <p><strong>Date:</strong> {event.startDate?.seconds ? new Date(event.startDate.seconds * 1000).toLocaleDateString() : "N/A"}</p>
-        <p><strong>Category:</strong> {event.category}</p>
-        <p><strong>Location:</strong> {event.location}</p>
-        <p><strong>Organizer:</strong> {event.organizer || "N/A"}</p>
-        <p><strong>Time:</strong> {event.startTime || "N/A"} - {event.endTime || "N/A"}</p>
+        <p>
+          <strong>Date:</strong>{" "}
+          {event.startDate?.seconds
+            ? new Date(event.startDate.seconds * 1000).toLocaleDateString()
+            : "N/A"}
+        </p>
+        <p>
+          <strong>Category:</strong> {event.category}
+        </p>
+        <p>
+          <strong>Location:</strong> {event.location}
+        </p>
+        <p>
+          <strong>Organizer:</strong> {event.organizer || "N/A"}
+        </p>
+        <p>
+          <strong>Time:</strong> {event.startTime || "N/A"} -{" "}
+          {event.endTime || "N/A"}
+        </p>
       </div>
 
       <div className="event-description">
@@ -78,10 +133,16 @@ const EventDetails = () => {
       </div>
 
       <div className="event-actions">
-        <button className="event-action-button" onClick={() => handleProtectedAction("Join")}>
+        <button
+          className="event-action-button"
+          onClick={() => handleProtectedAction("Join")}
+        >
           Join Event
         </button>
-        <button className="event-action-button" onClick={() => handleProtectedAction("Bookmark")}>
+        <button
+          className="event-action-button"
+          onClick={() => handleProtectedAction("Bookmark")}
+        >
           Bookmark
         </button>
       </div>
@@ -98,7 +159,14 @@ const EventDetails = () => {
         </div>
       ) : (
         <p style={{ marginTop: "1rem" }}>
-          Please <span onClick={() => navigate("/login")} style={{ cursor: "pointer", color: "blue" }}>log in</span> to donate.
+          Please{" "}
+          <span
+            onClick={() => navigate("/login")}
+            style={{ cursor: "pointer", color: "blue" }}
+          >
+            log in
+          </span>{" "}
+          to donate.
         </p>
       )}
     </div>
