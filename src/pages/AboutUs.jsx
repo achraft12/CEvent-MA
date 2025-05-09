@@ -28,7 +28,7 @@ const teamMembers = [
     image: "https://via.placeholder.com/150",
   },
   {
-    name: "Hamza Idrissi",
+    name: "Ghali Nidal Ettiji",
     role: "frontend Developer",
     description: "Works on the client-side of the application, ensuring a smooth and engaging user experience.",
   
