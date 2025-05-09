@@ -4,32 +4,34 @@ import "./AboutUs.css";
 const teamMembers = [
   {
     name: "Achraf Taki",
-    role: "Project Lead",
-    description: "Oversees the project's direction and ensures all milestones are met. Passionate about tech for social good.",
+    role: "FULL-STACK Developer",
+    description: "Responsible for both frontend and backend development. Passionate about creating efficient and scalable applications.",
+   
     image: "https://via.placeholder.com/150", // Replace with actual image URLs
   },
   {
-    name: "Sarah El Mansouri",
+    name: "ayman ELAKKAOUI ",
     role: "Frontend Developer",
     description: "Crafts intuitive and responsive user interfaces to deliver seamless user experiences.",
     image: "https://via.placeholder.com/150",
   },
   {
-    name: "Youssef Bensalem",
+    name: "Bilal Hassani",
     role: "Backend Developer",
     description: "Manages the server, database, and APIs. Ensures secure and efficient data flow.",
     image: "https://via.placeholder.com/150",
   },
   {
-    name: "Imane Chafik",
+    name: "wassim Benferrou",
     role: "UI/UX Designer",
     description: "Designs clean and accessible layouts that make the platform visually appealing and user-friendly.",
     image: "https://via.placeholder.com/150",
   },
   {
     name: "Hamza Idrissi",
-    role: "QA & Tester",
-    description: "Ensures the platform is bug-free and performs well under all conditions.",
+    role: "frontend Developer",
+    description: "Works on the client-side of the application, ensuring a smooth and engaging user experience.",
+  
     image: "https://via.placeholder.com/150",
   },
 ];
